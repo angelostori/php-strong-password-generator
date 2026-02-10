@@ -2,6 +2,15 @@
 
 require_once "./functions.php";
 
+if($password != "" && $password != "Seleziona almeno un tipo di carattere") {
+
+    session_start();
+    //salviamo la password in una variabile di sessione
+    $_SESSION["password"] = $password;
+
+    header("Location: ./password.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +20,7 @@ require_once "./functions.php";
     <title>Strong Pass Gen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<body class="bg-primary">
+<body class="bg-dark">
     <section class="container mt-5">
         <h1 class="text-center mb-4 text-secondary">Strong Password Generator</h1>
 
@@ -21,7 +30,7 @@ require_once "./functions.php";
 
         <?php 
             if ($password) {
-                echo "<div class='alert alert-primary'>La tua password di <b>" . $_GET['pass_length'] . " </b>caratteri:<b> $password </b></div>";
+                echo "<div class='alert alert-primary'> $password </b></div>";
             }
         ?>
 
