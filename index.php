@@ -1,27 +1,56 @@
 <?php
 var_dump($_GET);
 
-$getLength = (int) $_GET["pass_length"];
+function pass_generator(int $num, bool $letters, bool $numbers, bool $symbols) : string {
 
-function pass_generator(int $num) : string {
+    $chars = "";
 
-    $characters = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890,.!£$%&/()+;:@#";
+    if ($letters) {
+        $chars .= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    }
+
+    if ($numbers) {
+        $chars .= "0123456789";
+    }
+
+    if ($symbols) {
+        $chars .= ",.!£$%&/()^+;:@#";
+    }
+
+    //se nessuna checkbox selezionata
+    if ($chars === "") {
+        return "Seleziona almeno un tipo di carattere";
+    }
 
     $newPassword = "";
 
                 //prende l'ultimo indice valido della stringa
                 //-1 perchè la lunghezza parte da 1 mentre l'indice da 0
-    $maxIndex = strlen($characters) - 1;
+    $maxIndex = strlen($chars) - 1;
 
     for ($i = 0; $i < $num; $i++) {
         $randomIndex = random_int(0, $maxIndex);
-        $newPassword .= $characters[$randomIndex];
+        $newPassword .= $chars[$randomIndex];
     }
 
     return $newPassword;
 }
 
-var_dump(pass_generator($getLength))
+$password = "";
+
+if (isset($_GET["pass_length"])) {
+
+    $length = (int) $_GET["pass_length"];
+
+    $letters = isset($_GET["letters"]);
+    $numbers = isset($_GET["numbers"]);
+    $symbols = isset($_GET["symbols"]);
+
+    $password = pass_generator($length, $letters, $numbers, $symbols);
+}
+
+var_dump($password);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +68,11 @@ var_dump(pass_generator($getLength))
             Genera una password sicura
         </h2>
 
-        <div class="alert alert-primary" role="alert">
-            Nessun parametro valido inserito
-        </div>
+        <?php 
+            if ($password) {
+                echo "<div class='alert alert-primary'> $password </div>";
+            }
+        ?>
 
         <form action="" method="GET" class="card p-3 mx-auto shadow-sm bg-light">
             <div class="row">
