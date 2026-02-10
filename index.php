@@ -1,10 +1,27 @@
 <?php
 var_dump($_GET);
 
+$getLength = (int) $_GET["pass_length"];
+
 function pass_generator(int $num) : string {
-    $characters = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890,.!£$%&/()^+;:@#";
+
+    $characters = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890,.!£$%&/()+;:@#";
+
+    $newPassword = "";
+
+                //prende l'ultimo indice valido della stringa
+                //-1 perchè la lunghezza parte da 1 mentre l'indice da 0
+    $maxIndex = strlen($characters) - 1;
+
+    for ($i = 0; $i < $num; $i++) {
+        $randomIndex = random_int(0, $maxIndex);
+        $newPassword .= $characters[$randomIndex];
+    }
+
+    return $newPassword;
 }
 
+var_dump(pass_generator($getLength))
 ?>
 <!DOCTYPE html>
 <html lang="en">
