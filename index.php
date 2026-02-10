@@ -38,28 +38,11 @@ if($password != "" && $password != "Seleziona almeno un tipo di carattere") {
             <div class="row">
 
                 <div class="col-md-6">
-                    <label for="length" class="form-label mt-1">Lunghezza password:</label>
-
-                    <span class="d-block my-3">
-                        Consenti ripetizioni di uno o più caratteri:
-                    </span>
-
-                    <button type="submit" class="btn btn-primary mt-5">Invia</button>
-                    <button type="reset" class="btn btn-secondary mt-5">Annulla</button>
+                    <label for="length" class="form-label">Lunghezza password:</label>
                 </div>
 
                 <div class="col-md-2">
                     <input type="number" name="pass_length" id="length" min="6" max="16" class="form-control mb-3">
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="repeat" id="yes" value="yes">
-                        <label class="form-check-label" for="yes">Sì</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="repeat" id="no" value="no">
-                        <label class="form-check-label" for="no">No</label>
-                    </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="letters" id="letters">
@@ -75,6 +58,9 @@ if($password != "" && $password != "Seleziona almeno un tipo di carattere") {
                         <input class="form-check-input" type="checkbox" name="symbols" id="symbols">
                         <label class="form-check-label" for="symbols">Simboli</label>
                     </div>
+
+                     <button type="submit" class="btn btn-primary mt-5">Invia</button>
+                    <button type="reset" class="btn btn-secondary mt-5">Annulla</button>
                 </div>
 
             </div>
